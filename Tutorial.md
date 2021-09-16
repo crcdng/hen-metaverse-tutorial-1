@@ -86,19 +86,23 @@ If you want you can study the other objects in the scene, change some of their p
 
 A Tezos public wallet adress looks like this: "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". You can view the artist page for this address on [Hic et Nunc](https://www.hicetnunc.xyz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/creations) to see that it is mikrosil, an illustrator. a Note that all transactions and balances for all adresses on the blockchain are public so we can look at the current balance with a blockchain explorer like [tzkt.io](https://tzkt.io/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/operations/). 
 
-Inside the 3D scene it would not be fun to enter a long string of characters like this, therefore we will add use a standard form field on top of the scene.
+Feel free to look up a few adresses on Hic et Nunc and tzkt.io. Found some rich artists? Or use your own address if you have one already.
 
-## 4. Install the Taquito frameworks and Parcel, a development tool
+Inside the 3D scene it would not be fun to enter a long string of characters like this, therefore we will add use a standard form field on top of the scene. Lets prepare this now.
+
+Insert `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">` after the line that starts with `<script src`. 
+
+## 4. Install the Taquito framework and the Parcel development tool
 
 Before we can continue, we must get some libraries and frameworks. One is [Taquito](https://tezostaquito.io/), that will provide us with functions to talk to the blockchain data provider. The other one is [Parcel](https://parceljs.org/) that will build the final web app for us. To install these two, we will use `npm`.
 
-In a terminal window, type `npm init --yes` and press Return. Make sure you are in the same folder where index.html is A file named `package.json` appears. It holds information about the project and the frameworks we use. You can study the file, but 
+In a terminal window, type `npm init --yes` and press Return. Make sure to do this in the same folder where your `index.html` is. A file named `package.json` appears which holds various information about the project. You can study it, but it is not strictly necessary for our goal.
 
-Type `npm install parcel` and press Return. You will see activity in the terminal and a folder named `node_modules` appears.
+Type `npm install taquito` and press Return. You will see activity in the terminal and a folder named `node_modules` appears. 
 
-Type `npm install taquito` and press Return.
+Type `npm install --save-dev parcel` and press Return. Again the terminal will get busy for a while.
 
-Make sure to wait between each step until it completes. `npm` will pull stuff from the web, therefore make sure you have a stable internet connection. 
+Make sure to wait between each step until it has completed. `npm` pulls stuff from repositories on the web, thus make sure you have a stable internet connection. 
 
 ## 5. Get blockchain data with Taquito
 
@@ -112,7 +116,7 @@ Make sure to wait between each step until it completes. `npm` will pull stuff fr
 
 ## Next: Wallets and Transactions
 
-That's it. In the next tutorial we go a step further. We will use Taquito again to interact directly with a wallet, call Hic et Nuc's smart contract to buy an NFT. 
+That's it. In the next tutorial we will go a step further. We will use Taquito again to interact directly with a wallet, call Hic et Nuc's smart contract to buy an NFT. 
 
 I will iupdate this page with the link. 
 
@@ -122,6 +126,7 @@ See you.
 
 ### Introduction
 
+[Hic et Nunc](https://www.hicetnunc.xyz/)    
 [Imperfect VR](https://straeubig.medium.com/the-spaces-we-create-the-spaces-we-inhabit-d2e79563758e).   
 [Raph Koster on the Metaverse](https://www.raphkoster.com/2021/09/02/online-world-or-metaverse/).   
 [Hic et Nunc](https://www.hicetnunc.xyz/).   
@@ -142,14 +147,14 @@ See you.
 
 ## 3. Enter a wallet address 
 
+[tzkt.io](https://tzkt.io/)
 
-## 4. Install the Taquito frameworks and Parcel, a development tool
+## 4. Install the Taquito framework and the Parcel development tool
 
 We install these frameworks via `npm`, these links are for reference.
 
 [Parcel](https://parceljs.org/)    
 [Taquito](https://tezostaquito.io/)    
-
 
 ## 5. Get blockchain data with Taquito
 
