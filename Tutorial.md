@@ -1,5 +1,7 @@
 # The Hic et Nunc Metaverse Tutorial Series
 
+**WORK IN PROGRESS - NOT COMPLETE YET**
+
 Hi and welcome to this brand new series of tutorials. 
 
 The **Metaverse** is a term that currently pops up everywhere. Some see it as a decentralized futuristic space linking Virtual / Augmented Realities and blockchains. Others claim that they are already buildig it (in which case there would be more than one Metaverse, and we probably would need a Meta-Meta-verse). And still others note that the origin of the concept is a [quite dystopic one](https://en.wikipedia.org/wiki/Metaverse) and therefore should be avoided. 
@@ -8,7 +10,7 @@ I use the term to describe a future web 3.0, imagine a decentralized VR / AR / N
 
 **Hic et Nunc** (HEN) is one of the fastest growing NFT platforms and at the same time a place for a diverse community of artists and collectors. HEN is [open source](https://github.com/hicetnunc2000/) and lives on [Tezos](https://tezos.com/), a "green" / [energy efficient](https://arxiv.org/abs/2109.03667) blockchain. You can read about the history of Hic et Nunc [here](https://github.com/i3games/hen-timeline/blob/main/timeline.md).
 
-So we start with a tiny little atom of a Metaverse, possibly, and watch it grow in size and capacity. The main goal is to learn about and experiment with WebXR and green NFTs.
+So we start with the tiny little atom of a Metaverse, possibly, and watch it grow in size and capacity. The main goal is to learn about and experiment with WebXR and green NFTs.
 
 This is the roadmap:
 
@@ -68,33 +70,53 @@ Let's visit the A-Frame website and take the code from their [introduction tutor
 </html>
 ```
 
-Copy and paste this code into a file and save it as `index.html`. Now click on "Go Live" in the bottom bar in VS Code to start Live Server. Your web browser should pop up. Now you get a warning 
+Copy and paste this code into a file and save it as `index.html`. Now click on "Go Live" in the bottom bar in VS Code to start Live Server. Your web browser should pop up. Now you get a warning, because we are using `http:` instead of a secure connection over `https:`, which is ok for local development. Maybe you have to search a bit in the message that is displyed, but your browser will let you chose to display the page and you will see this:
 
 ![Initial Scene](assets/initial_scene.jpg)
  
 This is our VR world. Impressed? Note the little VR button in the lower right corner. You can open this page in your favourite VR glasses or in your smartphone with a (cardboard VR viewer)[https://arvr.google.com/cardboard/], tap this button and you will be ... in the scene. 
 
-Apart from the [Magic of VR](https://straeubig.medium.com/the-spaces-we-create-the-spaces-we-inhabit-d2e79563758e), this is a web page. The part between `<a-scene>` and `</a-scene>` describes the objects that you can see in the scene.  
+Aside from the [Magic of VR](https://straeubig.medium.com/the-spaces-we-create-the-spaces-we-inhabit-d2e79563758e), this is a web page. The part between `<a-scene>` and `</a-scene>` describes the objects that you can see in the scene.  
 
 For example, `<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>` means: there is a box in the scene at position -1, 0.5, -3, rotated by 45 degrees with [this particular color](https://www.google.com/search?q=%234CC3D9). 
 
-Study the other objects in the scene, change some of their parameters then save the scene to see what happens. If you run into errors try to figure out what went wrong. When you are done, copy the original code from the A-Frame website again.  
+If you want you can study the other objects in the scene, change some of their parameters then save the scene to see what happens. If you run into errors, try to figure out what went wrong. When you are done, copy the original code from the A-Frame website again.  
 
 ## 3. Enter a wallet address 
 
+A Tezos public wallet adress looks like this: "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". You can view the artist page for this address on [Hic et Nunc](https://www.hicetnunc.xyz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/creations) to see that it is mikrosil, an illustrator. a Note that all transactions and balances for all adresses on the blockchain are public so we can look at the current balance with a blockchain explorer like [tzkt.io](https://tzkt.io/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/operations/). 
 
+Inside the 3D scene it would not be fun to enter a long string of characters like this, therefore we will add use a standard form field on top of the scene.
 
-## 4. Build a development pipeline with Parcel
+## 4. Install the Taquito frameworks and Parcel, a development tool
 
+Before we can continue, we must get some libraries and frameworks. One is [Taquito](https://tezostaquito.io/), that will provide us with functions to talk to the blockchain data provider. The other one is [Parcel](https://parceljs.org/) that will build the final web app for us. To install these two, we will use `npm`.
 
+In a terminal window, type `npm init --yes` and press Return. Make sure you are in the same folder where index.html is A file named `package.json` appears. It holds information about the project and the frameworks we use. You can study the file, but 
+
+Type `npm install parcel` and press Return. You will see activity in the terminal and a folder named `node_modules` appears.
+
+Type `npm install taquito` and press Return.
+
+Make sure to wait between each step until it completes. `npm` will pull stuff from the web, therefore make sure you have a stable internet connection. 
 
 ## 5. Get blockchain data with Taquito
 
+(tbd.)
 
 
-## 6. Putting everything together: get the wallet balance
+## 6. Putting everything together: build the app, get the wallet balance
+
+(tbd.)
 
 
+## Next: Wallets and Transactions
+
+That's it. In the next tutorial we go a step further. We will use Taquito again to interact directly with a wallet, call Hic et Nuc's smart contract to buy an NFT. 
+
+I will iupdate this page with the link. 
+
+See you.
 
 ## Links
 
@@ -121,10 +143,16 @@ Study the other objects in the scene, change some of their parameters then save 
 ## 3. Enter a wallet address 
 
 
-## 4. Build a development pipeline with Parcel
+## 4. Install the Taquito frameworks and Parcel, a development tool
+
+We install these frameworks via `npm`, these links are for reference.
+
+[Parcel](https://parceljs.org/)    
+[Taquito](https://tezostaquito.io/)    
 
 
 ## 5. Get blockchain data with Taquito
 
 
 ## 6. Putting everything together: get the balance of a wallet
+
