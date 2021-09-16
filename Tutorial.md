@@ -4,7 +4,7 @@
 
 Hi and welcome to this brand new series of tutorials. 
 
-The **Metaverse** is a term that currently pops up everywhere. Some see it as a decentralized futuristic space linking Virtual / Augmented Realities and blockchains. Others claim that they are already buildig it (in which case there would be more than one Metaverse, and we probably would need a Meta-Meta-verse). And still others note that the origin of the concept is a [quite dystopic one](https://en.wikipedia.org/wiki/Metaverse) and therefore should be avoided. 
+The **Metaverse** is a term that currently pops up everywhere. Some see it as a decentralized futuristic space linking Virtual / Augmented Realities and blockchains. Others claim that they are already building it (in which case there would be more than one Metaverse, and we probably would need a Meta-Meta-verse). And still others note that the origin of the concept is a [quite dystopian one](https://en.wikipedia.org/wiki/Metaverse) and therefore should be avoided. 
 
 I use the term to describe a future web 3.0, imagine a decentralized VR / AR / NFT / smart contract / data layer built on the open web. The last point is crucial and therefore we will use [WebXR](https://www.w3.org/TR/webxr/)) throughout in these tutorials.
 
@@ -18,7 +18,7 @@ This is the roadmap:
 The tutorial you are reading right now is the first part of the series. Init, we set up our tools, create a tiny virtual world and interact with a blockchain service to display the balance of a Tezos address. 
 
 **Tutorial 2: Wallets and Transactions**.     
-In part 2 of the series we are going to buy a NFT from our virtual world by calling a smart contract. We will lern how to to iteract with a wallet which is to cofirmthe transaction
+In part 2 of the series we are going to buy a NFT from our virtual world by calling a smart contract. We will learn how to interact with a wallet to confirm the transaction.
 
 **Tutorial 3: Writing a Smart Contract for Interaction**.   
 In part 3 we finally write our own smart contract in order to facilitate collector to collector interaction in Virtual Reality.
@@ -28,9 +28,9 @@ Like a certain movie franchise, part 4 is unknown yet but it might bring joy and
 
 ## Prerequisites
 
-The tutorials assume that you know how to install software, create files and folders, use a code editor and run commands from a terminal (also called "command line" or "shell"). Experience in HTML, CSS and JavaScript (tutorial 1 and 2) and in Python (tutorial 3) are a plus, but not required. We will start from scratch and work all the way through towards blockchain programming. Therefore each individual part must cover a lot of ground. To pull this off, I keep implementation and tooling to a absolut minimum and rather provide pointers for those who want explore specific topics further. 
+The tutorials assume that you know how to install software, create files and folders, use a code editor and run commands from a terminal (also called "command line" or "shell"). Experience in HTML, CSS and JavaScript (tutorial 1 and 2) and in Python (tutorial 3) are a plus, but not required. We will start from scratch and work all the way through towards blockchain programming. Therefore each individual part must cover a lot of ground. To pull this off, I keep implementation and tooling to an absolute minimum and rather provide pointers for those who want to explore specific topics further. 
 
-My goal is that everyone is able to follow. If something is still unclear or if you spot a mistake, please leave a bug report on the Github repository. Thereby you can help improve the tutorials for yourself and for others. 
+My goal is to explain things so that everyone is able to follow. If something is still unclear or if you spot a mistake, please leave a bug report on the Github repository. Thereby you can help improve the tutorials for yourself and for others. 
 
 Let's go. 
  
@@ -47,7 +47,7 @@ You need the following set of tools to follow the first tutorial:
 These are the tools we will be using during this course. If you are just getting started, follow the links at the end of the article to install them. If you are advanced, feel free to use your favourite editor / server / package manager instead. 
 
 5. I recommend for this tutorial to have your own Tezos wallet, and in the second tutorial you need one. I use the Temple wallet with Chrome. You also need a small amount of Tez (probably less than 1 Tez overall) in order to buy an NFT in tutorial 2 and for the interactions in tutorial 3.    
-6. In tutorial 3 we will use SmartPy to write a smart contract. To test the contract you will need two Tezos addresses which both own an NFT on Hic et Nunc.
+6. In tutorial 3 we will use [SmartPy](https://smartpy.io/) to write a smart contract. To test the contract you will need two Tezos addresses which both own an NFT on Hic et Nunc.
 
 ## 2. Create a minimal VR Scene with A-Frame  
 
@@ -70,7 +70,7 @@ Let's visit the A-Frame website and take the code from their [introduction tutor
 </html>
 ```
 
-Copy and paste this code into a file and save it as `index.html`. Now click on "Go Live" in the bottom bar in VS Code to start Live Server. Your web browser should pop up. Now you get a warning, because we are using `http:` instead of a secure connection over `https:`, which is ok for local development. Maybe you have to search a bit in the message that is displyed, but your browser will let you chose to display the page and you will see this:
+Copy and paste this code into a file and save it as `index.html`. Now click on "Go Live" in the bottom bar in VS Code to start Live Server. Your web browser should pop up. Now you get a warning, because we are using `http:` instead of a secure connection over `https:`, which is ok for local development. Maybe you have to search a bit in the message that is displayed, but your browser will let you chose to display the page and you will see this:
 
 ![Initial Scene](assets/initial_scene.jpg)
  
@@ -84,19 +84,21 @@ If you want you can study the other objects in the scene, change some of their p
 
 ## 3. Enter a wallet address 
 
-A Tezos public wallet adress looks like this: "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". You can view the artist page for this address on [Hic et Nunc](https://www.hicetnunc.xyz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/creations) to see that it is mikrosil, an illustrator. a Note that all transactions and balances for all adresses on the blockchain are public so we can look at the current balance with a blockchain explorer like [tzkt.io](https://tzkt.io/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/operations/). 
+A Tezos public wallet address looks like this: "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". You can view the artist page for this address on [Hic et Nunc](https://www.hicetnunc.xyz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/creations) to see that it is mikrosil, an illustrator who uses strong colours to produce cheerful images and animations. Note that all transactions and balances for all addresses on the blockchain are public so we can look at the current balance with a blockchain explorer like [tzkt.io](https://tzkt.io/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/operations/). 
 
-Feel free to look up a few adresses on Hic et Nunc and tzkt.io. Found some rich artists? Or use your own address if you have one already.
+Feel free to look up a few adresses on Hic et Nunc and tzkt.io. Found some rich artists? Or use your own address if you have one. Remember for the second tutorial where you will buy an NFT you will need your own wallet / address.
 
-Inside the 3D scene it would not be fun to enter a long string of characters like this, therefore we will add use a standard form field on top of the scene. Lets prepare this now.
+Inside the 3D scene it would not be fun to enter a long string of characters like this, therefore we will use a standard text form field on top of the scene. Let us prepare this now.
 
-Insert `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">` after the line that starts with `<script src`. 
+In your `index.html`, add `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">` after the line that starts with `<script src`. This will format our text form field.
+
+(tbd.)
 
 ## 4. Install the Taquito framework and the Parcel development tool
 
 Before we can continue, we must get some libraries and frameworks. One is [Taquito](https://tezostaquito.io/), that will provide us with functions to talk to the blockchain data provider. The other one is [Parcel](https://parceljs.org/) that will build the final web app for us. To install these two, we will use `npm`.
 
-In a terminal window, type `npm init --yes` and press Return. Make sure to do this in the same folder where your `index.html` is. A file named `package.json` appears which holds various information about the project. You can study it, but it is not strictly necessary for our goal.
+In a terminal window, type `npm init --yes` and press Return. Make sure to do this in the same folder where your `index.html` is. A file named `package.json` appears which holds various information about the project. You can study it, but it is not strictly necessary for now.
 
 Type `npm install taquito` and press Return. You will see activity in the terminal and a folder named `node_modules` appears. 
 
@@ -148,12 +150,14 @@ See you.
 ## 3. Enter a wallet address 
 
 [tzkt.io](https://tzkt.io/)
+[Materialize CSS](https://materializecss.com)    
 
 ## 4. Install the Taquito framework and the Parcel development tool
 
-We install these frameworks via `npm`, these links are for reference.
+We install these frameworks via `npm`; the links below are for reference.
 
-[Parcel](https://parceljs.org/)    
+[Parcel](https://parceljs.org/)   
+[Parcel v2 documentation](https://v2.parceljs.org/getting-started/webapp/)
 [Taquito](https://tezostaquito.io/)    
 
 ## 5. Get blockchain data with Taquito
