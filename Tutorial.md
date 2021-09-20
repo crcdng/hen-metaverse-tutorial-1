@@ -178,7 +178,7 @@ The final step is to tell `index.html` about the code in `main.js`. Go back to i
 <script src="main.js"></script>
 ```
 
-before the closing `</body>` tag at near the end of the file. Save both files, and Live Server should update the scene in the browser window.
+after the first `<script src...` and before the closing `</head>` tag. Save both files, and Live Server should update the scene in the browser window.
 
 Now move the green cursor over the image and click on it. Its [Hic et Nunc page](https://www.hicetnunc.xyz/objkt/181212) opens in a new tab.
 
@@ -194,6 +194,7 @@ At this point, this is the complete `index.html`:
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="main.js"></script>
   </head>
   <body>
     <a-scene>
@@ -238,7 +239,6 @@ At this point, this is the complete `index.html`:
         </a-camera>
       </a-entity>
     </a-scene>
-    <script src="main.js"></script>
   </body>
 </html>
 ```
@@ -260,9 +260,15 @@ AFRAME.registerComponent('henlink', {
 });
 ```
 
-Congratulations! We reached an important milestone: a VR scene that reacts to iteraction. For example, you could now go on and make a gallery with your favourite NFTs.
+If you want to go further, you could make the mouse-triggered interaction also work in VR. This can be done in two ways, either with a controller or with gaze-based interaction, for example if you use a smartphoe with a cardboard VR viewer. The A-Frame documentation has [details](https://aframe.io/docs/1.2.0/introduction/interactions-and-controllers.html). 
+
+Congratulations! We reached an important milestone: a VR scene that reacts to interaction. For example, you could now go on and make a gallery with your favourite NFTs. 
 
 ## 4. Enter a Tezos address
+
+Maybe the visitor want to know if you have enoght Tez in your wallet to buy the NFT. 
+Now it is time for a first look at the Tezos blockchain. 
+NOur nextv step is to add the option to look up a current balance.  
 
 A Tezos public wallet address looks like this: "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". You can view the artist page for this address on [Hic et Nunc](https://www.hicetnunc.xyz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/creations) to see that it is mikrosil, an illustrator who uses strong colours to produce cheerful images and animations. Note that all transactions and balances for all addresses on the blockchain are public so we can look at the current balance with a blockchain explorer like [tzkt.io](https://tzkt.io/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/operations/).
 
@@ -298,16 +304,7 @@ Then add the HTML for the text field:
 
 (tbd.)
 
-```html
-<div id="henwindow" class="modal" width="600" height="400">
-  <div class="modal-content">
-    <iframe id="henframe" src="" title="" width="600" height="400"></iframe>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-  </div>
-</div>
-```
+
 
 ## 5. Prepare a development pipeline with Parcel
 

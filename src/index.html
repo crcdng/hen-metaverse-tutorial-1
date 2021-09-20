@@ -7,6 +7,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="main.js"></script>
   </head>
   <body>
     <a-scene>
@@ -45,6 +46,25 @@
         </a-camera>
       </a-entity>
     </a-scene>
-    <script src="main.js"></script>
+
+    <div id="enteraddress" class="modal">
+      <div class="modal-content">
+        <h4>Tezos Address</h4>
+        <p>
+          Enter your Tezos wallet address and click on the sphere to see your
+          balance. Click on the image to open it's H=N OBJKT page.
+        </p>
+        <input id="address" type="text" class="validate" />
+        <label class="active" for="address">Tezos address</label>
+      </div>
+      <div class="modal-footer">
+        <a
+          href="#!"
+          id="enteradddress"
+          class="modal-close waves-effect waves-green btn-flat"
+          >Enter</a
+        >
+      </div>
+    </div>
   </body>
 </html>
