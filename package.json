@@ -1,9 +1,9 @@
 {
   "name": "hen-vr-tutorial-part-1",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "The Hic et Nunc Metaverse Tutorial Series Part 1. An Introduction to WebXR and NFTs.",
   "scripts": {
+    "build": "parcel build src/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
