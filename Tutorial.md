@@ -264,11 +264,9 @@ Congratulations! We reached an important milestone: a VR scene that reacts to in
 
 During the next steps of this tutorial we will have a first look at the Tezos blockchain. Maybe the visitor of your NFT gallery wants to know if they have enough Tez (the currency of Tezos) in their account to buy an NFT that is on display? I tutorial 2 we will learn how to talk to their wallet directly, but for now I am using a service to look up the balance. For our visitor, the experience is as follows: they enter their Tezos address, then click on the yellow sphere in the scene, then the balance will pop up as 3D Text.
 
-Before we can start coding, we need to install additional libraries and frameworks.  
+Before we can start coding, we need to install additional libraries.  
 
-One is [Taquito](https://tezostaquito.io/), the framework that will provide us with functions to talk to the blockchain. Taquito is written in [TypeScript](https://www.typescriptlang.org/), a superset of JavaScript that is popular. we will use a tool named [Parcel](https://parceljs.org/) that will To integrate it in our app build the web app for us. 
-
-To install these dependecies, we will use `npm`.
+One is [Taquito](https://tezostaquito.io/), the framework that will provide us with functions to talk to the blockchain. Taquito is written in [TypeScript](https://www.typescriptlang.org/), a superset of JavaScript that is popular. We will use a tool named [Parcel](https://parceljs.org/) to integrate Taquito into our code and to build the web app for us. To install these dependecies, we use `npm`.
 
 Open a terminal window (`Terminal -> New Terminal` in VS Code), type `npm init --yes` and press Return. In case you are using a different terminal program, make sure to do this in the folder where `index.html` is located. A file named `package.json` appears. It holds various information about the project. We will turn to it in a moment.
 
