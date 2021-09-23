@@ -9,10 +9,10 @@
     <div id="enteraddress">
       <h4>Tezos Address</h4>
       <p>
-        Enter your Tezos wallet address and click on the sphere to see your
+        Enter your Tezos wallet address and click on the cylinder to see your
         balance. Click on the image to open it's H=N OBJKT page.
       </p>
-      <input id="address" type="text" class="validate" />
+      <input id="address" type="text" size="40" class="validate" />
       <label class="active" for="address">Tezos address</label>
       <a
         href="#!"
@@ -23,6 +23,7 @@
     <a-scene embedded style="height: 600px; width: 1000px;">
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-text id="balancetext" value="" position="1 1.75 -3" color="black"></a-text>
       <a-cylinder
         id="balance"
         class="clickable" 

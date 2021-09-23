@@ -1,6 +1,14 @@
 import { App } from './app';
 const app = new App();
 
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('#enteraddress')?.addEventListener('click', async function () {
+    const address = document.querySelector('#address')?.value.trim();
+    console.log(address);
+    app.init(address);
+  });
+});
+
 AFRAME.registerComponent('henlink', {
   schema: { url: { type: 'string' } },
   init: function () {
@@ -23,9 +31,9 @@ AFRAME.registerComponent('balance', {
     this.el.addEventListener('click', async function (evt) {
       console.log('click on component balance');
       const balance = await app.getBalance();
-      const textGeometryAttribute = `value: ${balance} Tz; font: #comic-sans-bold`;
-      document.querySelector('#balance').setAttribute('text-geometry', textGeometryAttribute);
       console.log(balance);
+      const textAttribute = `${balance} Tz`;
+      document.querySelector('#balancetext')?.setAttribute('value', textAttribute);
     });
   }
 });

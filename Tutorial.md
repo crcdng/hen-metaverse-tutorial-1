@@ -298,13 +298,11 @@ Scroll further down to `Root -> Edit in settings.json`. Click on the link and in
 
 Save the file. Then stop and restart Live Server with the button in the status bar at the bottom of the VS Code window. You should see our 3D scene in the browser window again.    
 
-On the surface, it seems we are back where we were in the previous step, yet under the hood we have achieved a lot. In particular, we now have a development pipeline in place that allows us to continue with the next steps. If all this is new for you, you mighty wonder if coding always involves such a large amount of configurations and setup. The answer is: it depends on the particular project and coding ennvironment, but often these steps are not spelled out explicitely like in this tutorial. 
+On the surface, it seems we are back where we were in the previous step, yet under the hood we have achieved a lot. In particular, we now have a development pipeline in place that allows us to continue with the next steps. If all this is new for you, you mighty wonder if coding always involves such a large amount of configurations and setup. The answer is: it depends on the particular project and coding ennvironment, but often these steps are not spelled out explicitely. 
 
 ## 5. Get blockchain data with Taquito
 
-In this step we will finally get blockchain data through the Taquito library. Each transaction, as well as each account on the blockchain is public, so you can look up an account balance with a blockchain explorer like [tzkt.io](https://tzkt.io/). A Tezos account address looks like a string of letters and numbers, for example this one:  "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". On Hic et Nunc you can view the artist's page for this address: [https://www.hicetnunc.xyz/tz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9](https://www.hicetnunc.xyz/tz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9). It is mikrosil, an illustrator who uses strong colours to produce cheerful images and animations. 
-
-To get a feeling for them, look up a few adresses on Hic et Nunc and tzkt.io. Use your own address if you already have a wallet. A reminder, in the second tutorial you will need a wallet in order to buy an NFT on Hic et Nunc. 
+Now we will connect to the Tezos blockchain through the Taquito library we installed in the previous step. 
 
 First create a new file `app.js` and save it in the `src` folder.
 
@@ -319,14 +317,19 @@ export class App {
   init (address) { this.address = address; }
 
   async getBalance (address = this.address) {
-    const rawBalance = await this.tk.rpc.getBalance(address);
-    const balance = rawBalance.toNumber() / 1000000;
+    let balance = 0.0;
+    try {
+      const rawBalance = await this.tk.rpc.getBalance(address);
+      balance = rawBalance.toNumber() / 1000000;
+    } catch (error) {
+      console.error("Could not get a balance. Check the address you entered and try again.");
+    }
     return balance;
   }
 }
 ```
 
-This code declares a class `App` with a method `init` that allows us to set a Tezos address and another method `getBalance` that returns the balance for that address. Our class uses the `TezosToolkit` class provided by the Taquito library we installed earlier. The data is pulled from a public node on the Tezos blockchain: `https://api.tez.ie/rpc/mainnet`.
+This code declares a class `App` with a method `init` that allows us to set a Tezos address and another method `getBalance` that returns the balance for that address. Our class uses the `TezosToolkit` class provided by Taquito. The data is pulled from a public node on the Tezos blockchain: `https://api.tez.ie/rpc/mainnet`.
 
 Now we will make use of that functionality in our `main.js`. 
 
@@ -350,7 +353,7 @@ AFRAME.registerComponent('balance', {
 });
 ```
 
-We want to link that component to the yellow cylinder that sits on the right side of our scene. What it does is to call the method `app.getBalance()` that we defined in `app.js` and to transform the resulting value into a funny looking 3D lettering. For this component to work, first we have to pull in the class from `app.js`. We also must instatiate that class by creating an object. At the top of `main.js`, add the following two lines:
+We want to link that component to the yellow cylinder that sits on the right side of our scene. What it does is to call the method `app.getBalance()` that we defined in `app.js` and to transform the resulting value into text inside our scene. For this component to work, first we have to pull in the class from `app.js`. We also must instatiate that class by creating an object. At the top of `main.js`, add the following two lines:
 
 ```javascript
 import { App } from './app';
@@ -409,9 +412,13 @@ The descripton for the NFT billboard link looks now like this:
 
 Wait until Parcel has finished rebuilding the code and test the scene by clicking on the NFT billboard and one the cylinder. The NFT link should open in a new tab or window as before, but the cylinder does not work as intended, maily because we haven't told it the Tezos account address yet. If you look into the browser console (in Chrome: `View -> Developer -> JavaScript console`) you see a couple of error messages. In the next step we are going to add the missing piece.
 
-## 6 Enter a Tezos account address
+## 6. Enter a Tezos account address
 
-Because the Tezos account address is such along string of characters, it wouldn't be fun to enter it in our 3D scene. Instead, we will use a standard HTML form field so we can copy and paste an address. Let's prepare this now.
+Each transaction and each account on the blockchain is public, so you can look up an account balance with a blockchain explorer like [tzkt.io](https://tzkt.io/). A Tezos account address looks like a string of letters and numbers, for example this one:  "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". On Hic et Nunc you can view the artist's page for this address: [https://www.hicetnunc.xyz/tz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9](https://www.hicetnunc.xyz/tz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9). It is mikrosil, an illustrator who uses strong colours to produce cheerful images and animations. 
+
+To get a feeling for them, look up a few adresses on Hic et Nunc and tzkt.io. Use your own address if you already have a wallet. A reminder, in the second tutorial you will need a wallet in order to buy an NFT on Hic et Nunc. 
+
+As the Tezos account address is a long string, it wouldn't be fun to enter it character by character in our 3D scene. Instead, we will use a standard HTML form field where we can copy and paste an address into. Let's prepare this now.
 
 Insert the HTML for the text field before the `<a-scene>` tag. Make sure to insert it before the scene and not inside `<a-scene>...</a-scene>`, as the form field is not part of the 3D environment.
 
@@ -419,10 +426,10 @@ Insert the HTML for the text field before the `<a-scene>` tag. Make sure to inse
 <div id="enteraddress">
   <h4>Tezos Address</h4>
   <p>
-    Enter your Tezos wallet address and click on the sphere to see your
+    Enter your Tezos wallet address and click on the cylinder to see your
     balance. Click on the image to open it's H=N OBJKT page.
   </p>
-  <input id="address" type="text" class="validate" />
+  <input id="address" type="text" size="40" class="validate" />
   <label class="active" for="address">Tezos address</label>
   <a
     href="#!"
@@ -444,22 +451,43 @@ To do this, replace the opening `<a-scene>` tag with
 
 Now the A-Frame scene is back, immediately below the form entry. You can experiment with the `height` and `width` values to find something that fits your screen size. This is a minimal implementation which does not look great but it does the job. 
 
-## 7 Put everything together: build the app and get the wallet balance
+What is left to do? We must get the wallet address after the visitor clicks return and then clicks on the yellow cylinder. Then we call the `init()` method of the `app` object and hand in the adress. The following code snippet does exactly that. 
 
-    <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+In `main.js`, insert it below the line that says `const app = new App();`. 
 
+```javascript
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('#enteraddress')?.addEventListener('click', async function () {
+    const address = document.querySelector('#address')?.value.trim();
+    console.log(address);
+    app.init(address);
+  });
+});
+```
 
-(tbd.)
+In `index.html` add 
 
-## Next: Wallets and Transactions
+```html
+  <a-text id="balancetext" value="" position="1 1.75 -3" color="black"></a-text>
+```
 
-In part 2 of the series we are going to buy a NFT from our virtual world by calling a smart contract. We will learn how to interact with a wallet to confirm the transaction.
+before the line that starts with `<a-cylinder`. The text element sits invisible above the cylinder because it still is empty. Save all the files that you have changed.
 
-That's it. In the next tutorial we will go a step further. We will use Taquito again to interact directly with a wallet and call Hic et Nuc's smart contract to buy an NFT. In part 3 we finally write our own smart contract in order to facilitate an interaction between collectors in Virtual Reality.
+Enter a wallet address in the text field and click `Enter`. Then click on the yellow cylinder in the scene. You should see the text with the balance appear.
 
-I will update this page with a link when it is ready.
+## 7. First steps from Zero to Metaverse 
+
+That's it. That was a long tutorial and I hope you had fun following through. 
+
+As mentioned above the text field above the 3D scene does not look very nice. We also want the VR scene to full size of the browser window. We can also make the text that shows the balance 3D and add some animations ad 3D models to the scene. These ideas involve more materials and libraries and I will do this in a future update to this tutorial, adding an optional section. For the moment this has been long enough.
+
+In the next tutorial we will go a step further. We will again use Taquito to interact directly with our  wallet and call Hic et Nuc's smart contract to buy an NFT. In part 3 we finally write our own smart contract in order to facilitate an interaction between collectors in VR. Ad in part 4 we will see stranger things...
+
+I will update this page and add links to the other tutorials when they are ready.
 
 See you.
+
+@crcdng 
 
 ## Links
 
@@ -522,6 +550,6 @@ See you.
 [Additional Resources: A-Frame embedded scene](https://aframe.io/docs/1.2.0/components/embedded.html)    
 [Additional Resources: Learn CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS)    
 
-## 7. Putting everything together: get the wallet balance  
+## 7. First steps from Zero to Metaverse  
 
 [Additional Resources: HEN dev Resources](https://github.com/i3games/hen-dev-resources/blob/main/list.md)
