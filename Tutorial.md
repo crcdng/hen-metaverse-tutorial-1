@@ -89,7 +89,7 @@ Everything starts with an empty folder. Create a folder for this project. Then o
 </html>
 ```
 
-Then copy and paste the code into a file and save it as `index.html`. Open the directory inn VS Code. Now click on "Go Live" in the bottom bar to start Live Server. Your web browser should pop up. You will first get a warning, because we are using `http:` instead of a secure connection over `https:`, which is ok for local development. Maybe you have to search a bit in the message, but your browser will let you chose to display the page and you will see this:
+Then copy and paste the code into a file and save it as `index.html`. Open the directory inn VS Code. Now click on the button labelled "Go Live" in the bar at the bottom of the window to start Live Server. Your web browser should pop up. You will first get a warning, because we are using `http:` instead of a secure connection over `https:`, which is ok for local development. Maybe you have to search a bit in the message, but your browser will let you chose to display the page and you will see this:
 
 ![Initial Scene](assets/initial_scene.jpg)
 
@@ -114,11 +114,10 @@ Insert the following code right before the closing `</a-scene>` tag.
   src="https://ipfs.io/ipfs/QmZEXZrnWcutQLZg1zmXFE5s9L2YfRcQSckMoyR68u7hBx"
   class="clickable"
   henlink="url: https://www.hicetnunc.xyz/objkt/181212; loc: frame"
->
-</a-plane>
+></a-plane>
 ```
 
-This adds a plane with the image of an NFT (that I made for these tutorials, please excuse the art). In the second tutorial we will be able to collect this NFT directly. For now, we display its image, which is stored on the "Interplanetary File System", or IPFS for short. The `src` attribute of the `<a-plane>` element points to its IPFS address: `https://ipfs.io/ipfs/QmZEXZrnWcutQLZg1zmXFE5s9L2YfRcQSckMoyR68u7hBx`. To get this adress, go to the NFT page on Hic and Nunc, in this case [https://www.hicetnunc.xyz/objkt/181212](https://www.hicetnunc.xyz/objkt/181212), and right-click on the image. In Chrome, there will be an entry named "Copy Image Link".
+This adds our NFT billboard, a plane with the image of an NFT (that I made for these tutorials, please excuse the art). In the second tutorial we will be able to collect this NFT directly. For now, we display its image, which is stored on the "Interplanetary File System", or IPFS for short. The `src` attribute of the `<a-plane>` element points to its IPFS address: `https://ipfs.io/ipfs/QmZEXZrnWcutQLZg1zmXFE5s9L2YfRcQSckMoyR68u7hBx`. To get this adress, go to the NFT page on Hic and Nunc, in this case [https://www.hicetnunc.xyz/objkt/181212](https://www.hicetnunc.xyz/objkt/181212), and right-click on the image. In Chrome, there will be an entry named "Copy Image Link".
 
 Other attributes such as `position`, `rotation`, `width` and `height` should be familiar by now. `class="clickable"` and `henlink="url: https://www.hicetnunc.xyz/objkt/181212; loc: frame"` will become clear in a moment.
 
@@ -182,13 +181,13 @@ after the first `<script src...` and before the closing `</head>` tag. Save both
 
 Now move the green cursor over the image and click on it. Its [Hic et Nunc page](https://www.hicetnunc.xyz/objkt/181212) opens in a new tab.
 
-At this point, this is the complete `index.html`. I added two lines near the top to help the browser understanding the content:
+At this point, this is the complete `index.html`. I added two lines near the top to help the browser understand the content:
 
 ```html
-<!DOCTYPE html> <!-- I added this line for the browser -->
+<!DOCTYPE html> <!-- added for the browser -->
 <html>
   <head>
-    <meta charset="utf-8" /> <!-- I added this line for the browser -->
+    <meta charset="utf-8" /> <!-- added for the browser -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="main.js"></script>
   </head>
@@ -197,26 +196,23 @@ At this point, this is the complete `index.html`. I added two lines near the top
       <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
       <a-cylinder
+        id="balance"
+        class="clickable" 
         position="1 0.75 -3"
         radius="0.5"
         height="1.5"
         color="#FFC65D"
       ></a-cylinder>
-      <a-plane
-        position="0 0 -4"
-        rotation="-90 0 0"
-        width="4"
-        height="4"
-        color="#7BC8A4"
-      ></a-plane>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
       <a-plane
+        id = "nft"
+        class="clickable"
         position="-3.5 2.3 -5"
         rotation="0 20 0"
         width="4.5"
         height="4.5"
         src="https://ipfs.io/ipfs/QmZEXZrnWcutQLZg1zmXFE5s9L2YfRcQSckMoyR68u7hBx"
-        class="clickable"
         henlink="url: https://www.hicetnunc.xyz/objkt/181212"
       >
       </a-plane>
@@ -260,58 +256,164 @@ If you want to go further, you could extend the mouse-triggered interaction to a
 
 Congratulations! We reached an important milestone: a VR scene that reacts to interaction. For example, you could now go on and build a VR gallery with your favourite NFTs. 
 
-## 4. Prepare our development pipeline with Parcel and Taquito
+## 4. Prepare your development pipeline 
 
-During the next steps of this tutorial we will have a first look at the Tezos blockchain. Maybe the visitor of your NFT gallery wants to know if they have enough Tez (the currency of Tezos) in their account to buy an NFT that is on display? I tutorial 2 we will learn how to talk to their wallet directly, but for now I am using a service to look up the balance. For our visitor, the experience is as follows: they enter their Tezos address, then click on the yellow sphere in the scene, then the balance will pop up as 3D Text.
+During the next steps of this tutorial we will have a first look at the Tezos blockchain. Maybe the visitor of your NFT gallery wants to know if they have enough Tez (the currency of Tezos) in their account to buy an NFT that is on display? I tutorial 2 we will learn how to talk to their wallet directly, but for now I am using a service to look up the balance. For our visitor, the experience is as follows: they enter their Tezos address, then click on the yellow cylinder in the scene, then the balance will pop up as 3D Text.
 
-Before we can start coding, we need to install additional libraries.  
+Before we can continue coding, we need to install additional libraries.  
 
 One is [Taquito](https://tezostaquito.io/), the framework that will provide us with functions to talk to the blockchain. Taquito is written in [TypeScript](https://www.typescriptlang.org/), a superset of JavaScript that is popular. We will use a tool named [Parcel](https://parceljs.org/) to integrate Taquito into our code and to build the web app for us. To install these dependecies, we use `npm`.
 
-Open a terminal window (`Terminal -> New Terminal` in VS Code), type `npm init --yes` and press Return. In case you are using a different terminal program, make sure to do this in the folder where `index.html` is located. A file named `package.json` appears. It holds various information about the project. We will turn to it in a moment.
+Open a terminal window (`Terminal -> New Terminal` in VS Code), type `npm init --yes` and press Return. In case you are using a different terminal program, make sure to do this inside the folder where `index.html` is located. A file named `package.json` appears. It holds various information about the project and we will look into it in a moment.
 
-Type `npm install taquito` and press Return. You will see activity in the terminal and a folder named `node_modules` appears.
+Type `npm install @taquito/taquito` and press Return. You will see activity in the terminal and a folder named `node_modules` appears.
 
 Type `npm install --save-dev parcel` and press Return. Again the terminal will get busy for a while.
 
 Wait between each step until the installations have completed. `npm` pulls stuff from repositories on the web, thus it is preferrable to have a stable internet connection.
 
-Our project folder gets a little bit unwieldy as more files and folders appear. Before we go on, let us reorganize a bit. In the project folder, make a folder `src`. Move both `index.html` and `main.js` into this folder. Also in the project folder, make another folder `dist`. This one remains empty for the moment. 
+As more files and folders appear, our project folder gets a little bit unwieldy. Before we go on, let us therefore reorganize a bit. In the project folder, make a folder `src`. Move both `index.html` and `main.js` into this folder. Also in the project folder, make another folder `dist`. This one remains empty for the moment. 
 
-Now, open `package.json` in VS Code. This is the mai configuration file for our project. Delete the line that says `"main": "index.js"`. Then add the following two lines right below the line that says `"scripts": {`
+Now, open `package.json` in VS Code. This is the configuration file for our project. Delete the line that says `"main": "index.js"`. Then add the following three lines right below the line that says `"scripts": {`
 
 ```json
-"clean": "rm -rf dist",
-```
-and 
-```json
+"clean": "rm -rf dist/*",
 "build": "parcel build src/index.html",
+"watch": "parcel watch src/index.html",    
 ```
 
-Save `package.json`. In the terminal window, type `npm run build` and press Return. Parcel builds the app  inside the `dist` folder we created earlier. The final step for now is to tell Live Server that it has to look into that folder. In VS Code, select `Preferences -> Settings -> Extensions -> Live Server Config`.
-Scroll down until you see `Root -> Edit in settings.json`. Click on the link and in the file `settiings.json` that pops up, edit the line below. 
+Make sure you don't forget the trailing comma or VS Code will complain. These configurations give us new commands for `npm` to build the app and to clean the build folder. Save `package.json`. In the terminal, type `npm run watch` and press Return. From now on, each time Parcel detects a change in the source files, it will rebuild the app inside the `dist` folder that we created earlier. So, `src` contains the source files we are working on and `dist`, which stands for "distributable", contains the final output. In between the two Parcel does its magic. This kind of orgaisation has become standard practice in web development.
+
+Because the app is now built inside the `dist` folder, we have tell Live Server to look there. (Note for advanced readers: in this tutorial, I prefer to use Parcel for building only and Live Server to display the output from Parcel. If you know Parcel, feel free to configure it for hot reload as well.)
+
+In VS Code, select `Preferences -> Settings -> Extensions -> Live Server Config`.
+
+Scroll down to `Settings: Wait`. Change the default value from 100 to 500 milliseconds. 
+
+Scroll further down to `Root -> Edit in settings.json`. Click on the link and in the file `settiings.json` that pops up, edit the line as shown below. 
 
 ```json
  "liveServer.settings.root": "/dist", 
 ```
 
-As usual, save the file. Then stop and restart Live Server in the VS Code status bar. You should see our 3D scene in the browser window again.  
+Save the file. Then stop and restart Live Server with the button in the status bar at the bottom of the VS Code window. You should see our 3D scene in the browser window again.    
 
-On the surface it seems that we are back to the previous step, yet under the hood a lot has changed. We  have created a development pipeline that allows us to continue with the next steps.
+On the surface, it seems we are back where we were in the previous step, yet under the hood we have achieved a lot. In particular, we now have a development pipeline in place that allows us to continue with the next steps. If all this is new for you, you mighty wonder if coding always involves such a large amount of configurations and setup. The answer is: it depends on the particular project and coding ennvironment, but often these steps are not spelled out explicitely like in this tutorial. 
 
 ## 5. Get blockchain data with Taquito
 
-(tbd.)
+In this step we will finally get blockchain data through the Taquito library. Each transaction, as well as each account on the blockchain is public, so you can look up an account balance with a blockchain explorer like [tzkt.io](https://tzkt.io/). A Tezos account address looks like a string of letters and numbers, for example this one:  "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9". On Hic et Nunc you can view the artist's page for this address: [https://www.hicetnunc.xyz/tz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9](https://www.hicetnunc.xyz/tz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9). It is mikrosil, an illustrator who uses strong colours to produce cheerful images and animations. 
 
-## 6. Enter a Tezos address
+To get a feeling for them, look up a few adresses on Hic et Nunc and tzkt.io. Use your own address if you already have a wallet. A reminder, in the second tutorial you will need a wallet in order to buy an NFT on Hic et Nunc. 
 
-Note that each transaction and each balance on the blockchain are public, so you can look them up with a blockchain explorer like [tzkt.io](https://tzkt.io/). A Tezos account address looks like this: "tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9" which I picked as an example. On [Hic et Nunc] you can view the artist's page [for this address](https://www.hicetnunc.xyz/tz/tz1imNpo5WeCoE5cziWsdpiaThT8YgvbTtJ9/creations). It is mikrosil, an illustrator who uses strong colours to produce cheerful images and animations. 
+First create a new file `app.js` and save it in the `src` folder.
 
-Look up a few adresses on Hic et Nunc and tzkt.io. Found some rich artists? Poor artists? Use your own address if you already have a wallet. Remember in the second tutorial you will need a wallet in order to buy an NFT on Hic et Nunc. 
+```javascript
+import { TezosToolkit } from '@taquito/taquito';
 
-Because the address is along string of characters, it would not be fun to enter it inside our 3D scene. Instead, we will use a standard HTML text field so we can copy and paste an address. Let us prepare this now.
+export class App {
+  constructor (rcpClient = 'https://api.tez.ie/rpc/mainnet') {
+    this.tk = new TezosToolkit(rcpClient);
+  }
 
-Insert the HTML for the text field before the `<a-scene>` tag. Make sure to isert it before the scene and not inside the `<a-scene>..</a-scene>` tags, as these elements are not part of the 3D environment.
+  init (address) { this.address = address; }
+
+  async getBalance (address = this.address) {
+    const rawBalance = await this.tk.rpc.getBalance(address);
+    const balance = rawBalance.toNumber() / 1000000;
+    return balance;
+  }
+}
+```
+
+This code declares a class `App` with a method `init` that allows us to set a Tezos address and another method `getBalance` that returns the balance for that address. Our class uses the `TezosToolkit` class provided by the Taquito library we installed earlier. The data is pulled from a public node on the Tezos blockchain: `https://api.tez.ie/rpc/mainnet`.
+
+Now we will make use of that functionality in our `main.js`. 
+
+First, let's add a second component named `balance`. 
+
+```javascript
+AFRAME.registerComponent('balance', {
+  schema: {},
+  init: function () {
+    console.log('registering component balance');
+  },
+  update: function () {
+    this.el.addEventListener('click', async function (evt) {
+      console.log('click on component balance');
+      const balance = await app.getBalance();
+      const textGeometryAttribute = `value: ${balance} Tz; font: #comic-sans-bold`;
+      document.querySelector('#balance').setAttribute('text-geometry', textGeometryAttribute);
+      console.log(balance);
+    });
+  }
+});
+```
+
+We want to link that component to the yellow cylinder that sits on the right side of our scene. What it does is to call the method `app.getBalance()` that we defined in `app.js` and to transform the resulting value into a funny looking 3D lettering. For this component to work, first we have to pull in the class from `app.js`. We also must instatiate that class by creating an object. At the top of `main.js`, add the following two lines:
+
+```javascript
+import { App } from './app';
+const app = new App();
+```
+
+When you save the file, Parcel will immediately complain in the terminal window. First is says "Build failed." written in red which tells us something is wrong, then it gives the reason "Browser scripts cannot have imports or exports.", followed by the offending places. 
+
+If you want to understand precisely what is going on here, I recommend to have a look at the documentation of [ES 6 modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). To fix the issue, open `index.html`, find the line starting with `<script src="main.js"` and change it to:   
+
+```html
+<script src="main.js" type="module"></script>
+```
+
+This change is necessary for Parcel to work again, however it will throw off A-Frame, which won't put out an error message but silently fail to connect the two components in `main.js` to the elements in the scene. A bit of work is necessary to adapt our code to the new situation.
+
+At the bottom of `main.js`, add: 
+
+```javascript
+const nft = document.querySelector('#nft');
+nft.setAttribute('henlink', 'url: https://www.hicetnunc.xyz/objkt/181212');                         
+
+const balance = document.querySelector('#balance');
+balance.setAttribute('balance', '');     
+```
+
+This piece of code is meant to look for the plane and for the cylinder in our scene and add the two componets to it. We must edit both elements in `index.html` to make this happen.
+
+In our NFT billboard plane add `id = "nft"` and remove `henlink="url: https://www.hicetnunc.xyz/objkt/181212"` which is no loger needed here. In the yellow cylinder, add the attribute `id="balance"` and `class="clickable"`.
+
+The descripton for the NFT billboard link looks now like this: 
+
+```html
+<a-plane
+  id = "nft"
+  class="clickable"
+  position="-3.5 2.3 -5"
+  rotation="0 20 0"
+  width="4.5"
+  height="4.5"
+  src="https://ipfs.io/ipfs/QmZEXZrnWcutQLZg1zmXFE5s9L2YfRcQSckMoyR68u7hBx"
+></a-plane>
+```
+...and the cylinder like this:
+
+```html
+<a-cylinder
+  id="balance"
+  class="clickable" 
+  position="1 0.75 -3"
+  radius="0.5"
+  height="1.5"
+  color="#FFC65D"
+></a-cylinder>
+```
+
+Wait until Parcel has finished rebuilding the code and test the scene by clicking on the NFT billboard and one the cylinder. The NFT link should open in a new tab or window as before, but the cylinder does not work as intended, maily because we haven't told it the Tezos account address yet. If you look into the browser console (in Chrome: `View -> Developer -> JavaScript console`) you see a couple of error messages. In the next step we are going to add the missing piece.
+
+## 6 Enter a Tezos account address
+
+Because the Tezos account address is such along string of characters, it wouldn't be fun to enter it in our 3D scene. Instead, we will use a standard HTML form field so we can copy and paste an address. Let's prepare this now.
+
+Insert the HTML for the text field before the `<a-scene>` tag. Make sure to insert it before the scene and not inside `<a-scene>...</a-scene>`, as the form field is not part of the 3D environment.
 
 ```html
 <div id="enteraddress">
@@ -330,9 +432,9 @@ Insert the HTML for the text field before the `<a-scene>` tag. Make sure to iser
 </div>
 ```
 
-If you look at the page now, you can see the HTML parts  we just added, but the 3D scene is gone. Actually, it is still there, but not shown. We will fix this in a moment. You can press the VR button to open the scene in fullscreen mode, but then the text field will go away (use the esc-Button to back out). 
+If you look at the page now, you can see the parts we just added, but the 3D scene is gone. Actually, it is still there, but not visible. We will fix this in a moment. You can press the VR button to open the scene in fullscreen mode, but then the text field will go away (use the esc-Button to back out). 
 
-The reason is that A-Frame by default assumes it is the only content inside a page. To display other elements, we must [embed the scene](https://aframe.io/docs/1.2.0/components/embedded.html).
+By default A-Frame assumes it is the only content inside a page. To display other elements, we have to embed the scene [as described here](https://aframe.io/docs/1.2.0/components/embedded.html).
 
 To do this, replace the opening `<a-scene>` tag with 
 
@@ -340,11 +442,12 @@ To do this, replace the opening `<a-scene>` tag with
 <a-scene embedded style="height: 600px; width: 1000px;">
 ```
 
-Now the A-Frame scene is back, directly below the address entry. You can experiment with the `height` and `width` values to find something that fits your screen size. 
-
-This is the minimal implementation. 
+Now the A-Frame scene is back, immediately below the form entry. You can experiment with the `height` and `width` values to find something that fits your screen size. This is a minimal implementation which does not look great but it does the job. 
 
 ## 7 Put everything together: build the app and get the wallet balance
+
+    <script src="https://unpkg.com/aframe-text-geometry-component@^0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+
 
 (tbd.)
 
@@ -382,7 +485,7 @@ See you.
 
 ### 2. Create a minimal VR Scene with A-Frame
 
-[A-Frame](https://aframe.io/)
+[A-Frame](https://aframe.io/)    
 [A-Frame Introduction](https://aframe.io/docs/1.2.0/introduction/)
 
 [Additional Resources: Google Cardboard]([https://arvr.google.com/cardboard/)  
@@ -399,26 +502,25 @@ See you.
 [Additional Resources: Component Details](https://aframe.io/docs/1.2.0/core/component.html)  
 [Additional Resources: Learn JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
 
-## 4. Install the Taquito framework and the Parcel development tool
-
-We install these frameworks via `npm`; the links below are for reference.
+## 4. Prepare your development pipeline 
 
 [Parcel](https://parceljs.org/)  
-[Parcel v2 documentation](https://v2.parceljs.org/getting-started/webapp/)
+[Taquito](https://tezostaquito.io/)
 
+[Additional Resources: Parcel Version 2 documentation](https://v2.parceljs.org/getting-started/webapp/)
 [Additional Resources: TypeScript](https://www.typescriptlang.org/)
 [Additional Resources: npm](https://docs.npmjs.com/cli/v7/commands/npm)
 
-## 5. Enter a Tezos address
+## 5. Get blockchain data with Taquito 
 
 [tzkt.io](https://tzkt.io/)  
 
-[Additional Resources: A-Frame embedded scene](https://aframe.io/docs/1.2.0/components/embedded.html)
-[Additional Resources: Learn CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS)
+[Additional Resources: ES 6 modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 
-## 6. Get blockchain data with Taquito
+## 6. Enter a Tezos address
 
-[Taquito](https://tezostaquito.io/)
+[Additional Resources: A-Frame embedded scene](https://aframe.io/docs/1.2.0/components/embedded.html)    
+[Additional Resources: Learn CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS)    
 
 ## 7. Putting everything together: get the wallet balance  
 
