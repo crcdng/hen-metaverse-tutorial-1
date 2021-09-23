@@ -4,7 +4,9 @@ The first in a series of tutorials combining WebXR and the Hic et Nunc NFT art p
 
 Read the tutorial here: [Tutorial.md](Tutorial.md).
 
-The source files are in folder `src`. To see the results, serve folder `dist` from a web server.
+The source files are in folder `src`. 
+
+To see the results, run `npm install`, then `npm run build`, then serve folder `dist` from a web server.
 
 ## License
 
