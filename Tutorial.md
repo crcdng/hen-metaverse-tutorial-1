@@ -1,6 +1,6 @@
 # The Hic et Nunc Metaverse Tutorial Series
 
-**WORK IN PROGRESS - NOT COMPLETE YET**
+## Part 1: Enter the Micro-Metaverse
 
 Hi and welcome to a brand new series of tutorials that are intended as an introduction into WebXR and NFTs. 
 
@@ -14,12 +14,12 @@ So we start with the tiny little atom of a Metaverse, possibly, and watch it gro
 
 Ready? This is the roadmap:
 
-**Tutorial 1: Setup, Virtual World, Tezos**.  
-The tutorial you are reading right now is the first part of the series. We set up some tools and create a tiny virtual world that contains a link to an NFT. It also has an object that responds to a click event (more on that below). By activating the object it calls a a blockchain service to display the balance of a Tezos address that we enter.
+**Tutorial 1: Enter the Micro-Metaverse**.  
+The tutorial you are reading right now is the first part of the series. We set up some tools and create a tiny virtual world that contains a link to an NFT. It also has an object that responds to a click event (more on that below). By activating the object it calls a blockchain service to display the balance of a Tezos address that we enter.
 
 This is what we will see at the end:
 
-![Tutorial 1 scene](/assets/placeholder.jpg)
+![Tutorial 1 scene](/assets/scene.jpg)
 
 **Tutorial 2: Wallets and Transactions**.  
 In part 2 of the series we are going to buy a NFT from our virtual world by calling a smart contract. We will learn how to interact with a wallet to confirm the transaction.
@@ -262,7 +262,7 @@ During the next steps of this tutorial we will have a first look at the Tezos bl
 
 Before we can continue coding, we need to install additional libraries.  
 
-One is [Taquito](https://tezostaquito.io/), the framework that will provide us with functions to talk to the blockchain. Taquito is written in [TypeScript](https://www.typescriptlang.org/), a superset of JavaScript that is popular. We will use a tool named [Parcel](https://parceljs.org/) to integrate Taquito into our code and to build the web app for us. To install these dependencies, we use `npm`.
+One is [Taquito](https://tezostaquito.io/), the framework that will provide us with functions to talk to the blockchain. Taquito is written in [TypeScript](https://www.typescriptlang.org/), a quite popular superset of JavaScript. We will use a tool named [Parcel](https://parceljs.org/) to integrate Taquito into our code and to build the web app for us. To install these dependencies, we use `npm` which we already have installed above.
 
 Open a terminal window (`Terminal -> New Terminal` in VS Code), type `npm init --yes` and press Return. In case you are using a different terminal program, make sure to do this inside the folder where `index.html` is located. A file named `package.json` appears. It holds various information about the project and we will look into it in a moment.
 
