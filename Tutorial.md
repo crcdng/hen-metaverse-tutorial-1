@@ -475,11 +475,34 @@ before the line that starts with `<a-cylinder`. The text element sits invisible 
 
 Enter a wallet address in the text field and click `Enter`. Then click on the yellow cylinder in the scene. You should see the text with the balance appear.
 
-## 7. First steps from Zero to Metaverse 
+## 7. Done. But... there is more! 
 
-That's it. That was a long tutorial and I hope you had fun following through. 
+That's it. This was a long tutorial and I hope you had fun following through. 
 
-As mentioned above the text field above the 3D scene does not look very nice. We also want the VR scene to be the full size of the browser window. We can also make the text that shows the balance 3D and add some animations and 3D models to the scene. These ideas involve more materials and libraries and I will do this in a future update to this tutorial, adding an optional section. For the moment this has been long enough.
+As mentioned, the text field above the 3D scene does not look very nice. We also might want the VR scene to fill the browser window completely. Then, we can make the scene itself a bit more interesting by adding some 3D models and animations. 
+
+These ideas are a bit beyond the topics I wanted to cover here and they involve more concepts, materials and libraries. Therefore there will be two more optional sections to this tutorial, adding a UI and more action. If you clone the repository with Git you will be able to checkout the minimal UI version up to Step 6 with the following command:  
+
+```
+git checkout minimal-ui
+```
+
+I also want to encourage everyone to experiment for themselves with the two main frameworks I use:
+
+* A-Frame [https://aframe.io/](https://aframe.io/)
+
+* Taquito [https://tezostaquito.io/](https://tezostaquito.io/)
+
+
+## 8. (optional) A nicer UI 
+
+(tbd.)
+
+## 9. (optional) A more interesting scene 
+
+(tbd.)
+
+## 10. First steps from Zero to Metaverse 
 
 In the next tutorial we will go a step further. We will again use Taquito to interact directly with our  wallet and call Hic et Nuc's smart contract to buy an NFT. In part 3 we finally write our own smart contract in order to facilitate an interaction between collectors in VR. And in part 4 we will see stranger things...
 
