@@ -8,7 +8,7 @@ Hi and welcome to a brand new series of tutorials that are intended as an introd
 
 I use **Metaverse** to describe a potential open and decentralized Web 3.0. Imagine various VR / AR / NFT / IoT / data / smart contract layers built on open web standards that we all use and build upon. Decentralized means that you, me and everyone else can run their own stuff and own their data, instead of the current, largely corporation-owned walled gardens and social media conglomerates, a.k.a. the late Web 2.0. My tutorials therefore contain 100% open source, web-based ingredients such as [WebXR](https://www.w3.org/TR/webxr/).
 
-[**Hic et Nunc** ](https://www.hicetnunc.xyz/) (HEN, or H=N) is one of the fastest growing NFT platforms. At the same time it has established itself as a place for a diverse community of artists and collectors. HEN is [open source](https://github.com/hicetnunc2000/) and lives on [Tezos](https://tezos.com/), a "green"/[energy efficient](https://arxiv.org/abs/2109.03667) blockchain. You can read about the history of Hic et Nunc [here](https://github.com/i3games/hen-timeline/blob/main/timeline.md).
+[**Hic et Nunc**] (HEN, or H=N) is one of the fastest growing NFT communities, a place for a diverse community of artists and collectors. HEN is [open source](https://github.com/hicetnunc2000/) and lives on [Tezos](https://tezos.com/), a "green"/[energy efficient](https://arxiv.org/abs/2109.03667) blockchain. You can read about the history of Hic et Nunc [here](https://github.com/i3games/hen-timeline/blob/main/timeline.md).
 
 So we start with the tiny little atom of a Metaverse, possibly, and watch it grow in size and capacity. The main goal is to learn about WebXR and experiment with green NFTs.
 
