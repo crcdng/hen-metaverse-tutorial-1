@@ -1,5 +1,7 @@
 ## hen-metaverse-tutorial-1
 
+*Note this tutorial needs updating. If anything is unclear leave ma bug report.*
+
 The first in a series of tutorials combining WebXR and the Hic et Nunc NFT art platform.
 
 Read the tutorial here: [Tutorial.md](Tutorial.md).
